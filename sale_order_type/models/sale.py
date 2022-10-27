@@ -36,11 +36,14 @@ class SaleOrder(models.Model):
     def _default_sequence_id(self):
         """We get the sequence in same way the core next_by_code method does so we can
         get the proper default sequence"""
-        force_company = self.env.context.get("force_company")
-        if not force_company:
-            force_company = self.company_id.id or self.env.company.id
+        force_company = self.env.context.get("allowed_company_ids")
         return self.env["ir.sequence"].search(
-            [("code", "=", "sale.order"), ("company_id", "in", [force_company, False])],
+            [
+                ("code", "=", "sale.order"),
+                "|",
+                ("company_id", "in", force_company),
+                ("company_id", "=", False),
+            ],
             order="company_id",
             limit=1,
         )
@@ -144,15 +147,4 @@ class SaleOrder(models.Model):
             res["journal_id"] = self.type_id.journal_id.id
         if self.type_id:
             res["sale_type_id"] = self.type_id.id
-        return res
-
-
-class SaleOrderLine(models.Model):
-    _inherit = "sale.order.line"
-
-    @api.onchange("product_id")
-    def product_id_change(self):
-        res = super(SaleOrderLine, self).product_id_change()
-        if self.order_id.type_id.route_id:
-            self.update({"route_id": self.order_id.type_id.route_id})
         return res
