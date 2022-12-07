@@ -19,11 +19,6 @@ class SaleOrderTypology(models.Model):
             "picking_policy"
         ]["selection"]
 
-    @api.model
-    def default_picking_policy(self):
-        default_dict = self.env["sale.order"].default_get(["picking_policy"])
-        return default_dict.get("picking_policy")
-
     name = fields.Char(required=True, translate=True)
     description = fields.Text(translate=True)
     sequence_id = fields.Many2one(
@@ -45,7 +40,9 @@ class SaleOrderTypology(models.Model):
     picking_policy = fields.Selection(
         selection="_get_selection_picking_policy",
         string="Shipping Policy",
-        default=default_picking_policy,
+        default=lambda self: self.env["sale.order"]
+        .default_get(["picking_policy"])
+        .get("picking_policy"),
     )
     company_id = fields.Many2one(
         comodel_name="res.company",

@@ -169,10 +169,17 @@ class TestSaleOrderType(common.TransactionCase):
         order = self.create_sale_order(partner=self.partner_child_1)
         self.assertEqual(order.type_id, self.sale_type)
 
+    def test_sale_order_without_partner(self):
+        sale_order = self.sale_order_model.with_company(1).new()
+        self.assertEqual(sale_order.company_id.id, 1)
+        sale_type = self.env["sale.order.type"].search(
+            [("company_id", "in", [sale_order.company_id.id, False])], limit=1
+        )
+        self.assertEqual(sale_order.type_id, sale_type)
+
     def test_invoice_onchange_type(self):
         sale_type = self.sale_type
         invoice = self.create_invoice()
-        invoice.onchange_sale_type_id()
         self.assertEqual(invoice.invoice_payment_term_id, sale_type.payment_term_id)
         self.assertEqual(invoice.journal_id, sale_type.journal_id)
 

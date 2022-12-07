@@ -49,6 +49,7 @@ class SaleOrder(models.Model):
         )
 
     @api.depends("partner_id", "company_id")
+    @api.depends_context("partner_id", "company_id", "company")
     def _compute_sale_type_id(self):
         for record in self:
             if not record.partner_id:
@@ -101,15 +102,16 @@ class SaleOrder(models.Model):
             line_vals.update({"route_id": order_type.route_id.id})
             order.order_line.update(line_vals)
 
-    @api.model
-    def create(self, vals):
-        if vals.get("name", _("New")) == _("New") and vals.get("type_id"):
-            sale_type = self.env["sale.order.type"].browse(vals["type_id"])
-            if sale_type.sequence_id:
-                vals["name"] = sale_type.sequence_id.next_by_id(
-                    sequence_date=vals.get("date_order")
-                )
-        return super(SaleOrder, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get("name", _("New")) == _("New") and vals.get("type_id"):
+                sale_type = self.env["sale.order.type"].browse(vals["type_id"])
+                if sale_type.sequence_id:
+                    vals["name"] = sale_type.sequence_id.next_by_id(
+                        sequence_date=vals.get("date_order")
+                    )
+        return super().create(vals_list)
 
     def write(self, vals):
         """A sale type could have a different order sequence, so we could
