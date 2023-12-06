@@ -52,8 +52,8 @@ class TestAccountInvoiceReport(AccountTestInvoicingCommon):
         )
 
     def test_invoice_report_sale_order_type(self):
-        self.env["account.invoice.report"].read_group(
+        self.env["account.invoice.report"]._read_group(
             domain=[],
-            fields=["product_id, quantity, sale_type_id"],
             groupby="sale_type_id",
+            aggregates=["product_id, quantity, sale_type_id:sum"],
         )
