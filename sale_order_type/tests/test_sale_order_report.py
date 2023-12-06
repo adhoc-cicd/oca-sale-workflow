@@ -48,8 +48,8 @@ class TestSaleReport(TestSaleCommon):
         )
 
     def test_sale_report_sale_order_type(self):
-        self.env["sale.report"].read_group(
+        self.env["sale.report"]._read_group(
             domain=[],
-            fields=["product_id, quantity, type_id"],
             groupby="type_id",
+            aggregates=["product_id, quantity, type_id:sum"],
         )

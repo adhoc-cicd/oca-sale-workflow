@@ -12,7 +12,7 @@ class AccountMove(models.Model):
         string="Sale Type",
         compute="_compute_sale_type_id",
         store=True,
-        readonly=True,
+        readonly="state not in ['draft']",
         states={"draft": [("readonly", False)]},
         ondelete="restrict",
         copy=True,
