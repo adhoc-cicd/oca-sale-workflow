@@ -143,7 +143,6 @@ class TestSaleOrderType(common.TransactionCase):
             self.env["account.move"].with_context(default_move_type="out_invoice")
         )
         inv_form.partner_id = partner or self.partner
-        inv_form.sale_type_id = sale_type or self.sale_type
         with inv_form.invoice_line_ids.new() as inv_line:
             inv_line.product_id = self.product
             inv_line.account_id = self.account
