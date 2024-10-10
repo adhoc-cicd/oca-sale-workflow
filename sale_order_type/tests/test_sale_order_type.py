@@ -263,5 +263,5 @@ class TestSaleOrderType(common.TransactionCase):
         self.assertEqual(name, order.name, "The sequence shouldn't change!")
 
     def test_res_partner_copy_data(self):
-        new_partner = self.partner.copy()
+        new_partner = self.partner.copy({"sale_type": self.partner.sale_type.id})
         self.assertEqual(self.partner.sale_type, new_partner.sale_type)
