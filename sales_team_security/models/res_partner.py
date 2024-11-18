@@ -31,12 +31,15 @@ class ResPartner(models.Model):
             eview = etree.fromstring(res["arch"])
             xml_fields = eview.xpath("//field[@name='child_ids']")
             if xml_fields:
+                team_id = self.env.user.team_id.id
                 context_str = (
                     xml_fields[0]
                     .get("context", "{}")
                     .replace(
                         "{",
-                        "{'default_team_id': team_id, 'default_user_id': user_id,",
+                        "{'default_team_id': "
+                        + str(team_id)
+                        + ", 'default_user_id': user_id,",
                         1,
                     )
                 )
