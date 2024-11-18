@@ -33,9 +33,9 @@ includes the proper permissions for showing only the information related
 to that user sale team (having assigned that team/channel or no team at
 all, independently from the assigned salesman):
 
--  Contacts.
--  Quotations/Sales Orders (implemented in sales_team_security_sale)
--  Leads/Opportunities (implemented in sales_team_security_crm)
+- Contacts.
+- Quotations/Sales Orders (implemented in sales_team_security_sale)
+- Leads/Opportunities (implemented in sales_team_security_crm)
 
 It also handles the propagation of the sales team from commercial
 partners to the contacts, which standard doesn't do.
@@ -50,10 +50,10 @@ And finally, there are rules for partners to be restricted to the own
 ones for the group "User: Own Documents Only" for being coherent with
 the permission scheme. Someone with this permission will see:
 
--  Contacts without salesman nor team assigned.
--  Contacts without salesman assigned, but the same team.
--  Contacts with them as salesman, independently from the team.
--  Contacts with them as follower.
+- Contacts without salesman nor team assigned.
+- Contacts without salesman assigned, but the same team.
+- Contacts with them as salesman, independently from the team.
+- Contacts with them as follower.
 
 For keeping consistent accesses, followers of the main and
 shipping/invoice contacts are synced according the salesman of the
@@ -82,8 +82,8 @@ Configuration
 Known issues / Roadmap
 ======================
 
--  This module modifies sales security groups hierarchy, so any other
-   module doing something similar might conflict with this one.
+- This module modifies sales security groups hierarchy, so any other
+  module doing something similar might conflict with this one.
 
 Bug Tracker
 ===========
@@ -106,24 +106,24 @@ Authors
 Contributors
 ------------
 
--  `Tecnativa <https://www.tecnativa.com>`__:
+- `Tecnativa <https://www.tecnativa.com>`__:
 
-   -  Pedro M. Baeza
-   -  Víctor Martínez
-   -  César A. Sánchez
+  - Pedro M. Baeza
+  - Víctor Martínez
+  - César A. Sánchez
 
--  `Guadaltech <https://www.guadaltech.es>`__:
+- `Guadaltech <https://www.guadaltech.es>`__:
 
-   -  Ramón Bajona
+  - Ramón Bajona
 
--  Iván Todorovich <ivan.todorovich@gmail.com>
--  `Pesol <https://www.pesol.es>`__:
+- Iván Todorovich <ivan.todorovich@gmail.com>
+- `Pesol <https://www.pesol.es>`__:
 
-   -  Jonathan Oscategui Taza <info@pesol.es>
+  - Jonathan Oscategui Taza <info@pesol.es>
 
--  `Dynapps <https://www.dynapps.eu>`__:
+- `Dynapps <https://www.dynapps.eu>`__:
 
-   -  Bert Van Groenendael <bert.vangroenendael@dynapps.eu>
+  - Bert Van Groenendael <bert.vangroenendael@dynapps.eu>
 
 Maintainers
 -----------
