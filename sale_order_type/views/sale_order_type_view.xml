@@ -39,8 +39,8 @@
                             />
                             <field name="sequence_id" />
                             <field
-                                name="analytic_account_id"
-                                groups="analytic.group_analytic_accounting"
+                                name="project_id"
+                                groups="project.group_project_user,analytic.group_analytic_accounting"
                             />
                         </group>
                         <group>
