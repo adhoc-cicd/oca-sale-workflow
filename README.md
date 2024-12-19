@@ -40,6 +40,7 @@ addon | version | maintainers | summary
 [sale_force_whole_invoiceability](sale_force_whole_invoiceability/) | 17.0.1.0.0 |  | Sale Force Whole Invoiceability
 [sale_invoice_policy](sale_invoice_policy/) | 17.0.1.0.0 |  | Sales Management: let the user choose the invoice policy on the order
 [sale_manual_delivery](sale_manual_delivery/) | 17.0.1.0.0 |  | Create manually your deliveries
+[sale_multi_template_application](sale_multi_template_application/) | 17.0.1.0.0 |  | Sale multi template application
 [sale_order_archive](sale_order_archive/) | 17.0.1.0.0 |  | Archive Sale Orders
 [sale_order_carrier_auto_assign](sale_order_carrier_auto_assign/) | 17.0.1.0.0 |  | Auto assign delivery carrier on sale order confirmation
 [sale_order_general_discount](sale_order_general_discount/) | 17.0.1.0.0 |  | General discount per sale order
