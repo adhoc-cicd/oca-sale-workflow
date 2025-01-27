@@ -8,6 +8,7 @@
     "website": "https://github.com/OCA/sale-workflow",
     "license": "AGPL-3",
     "depends": ["sale"],
+    "development_status": "Production/Stable",
     "data": [
         "security/ir.model.access.csv",
         "wizards/sale_order_line_price_history.xml",
