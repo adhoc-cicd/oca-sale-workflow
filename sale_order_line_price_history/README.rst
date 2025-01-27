@@ -10,9 +10,9 @@ Sale order line price history
    !! source digest: sha256:482e8c924f3895c8929b55e172e6b46814b8ade2ffca34b5b3a5d7e6c03bb4bb
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-.. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
+.. |badge1| image:: https://img.shields.io/badge/maturity-Production%2FStable-green.png
     :target: https://odoo-community.org/page/development-status
-    :alt: Beta
+    :alt: Production/Stable
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
@@ -60,7 +60,7 @@ To use this module, you need to:
 Known issues / Roadmap
 ======================
 
-- A backend tour would be nice to have.
+-  A backend tour would be nice to have.
 
 Bug Tracker
 ===========
@@ -83,18 +83,18 @@ Authors
 Contributors
 ------------
 
-- `Tecnativa <https://www.tecnativa.com>`__:
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  - Pedro M. Baeza
-  - Ernesto Tejeda
-  - David Vidal
-  - Carlos Roca
+   -  Pedro M. Baeza
+   -  Ernesto Tejeda
+   -  David Vidal
+   -  Carlos Roca
 
-- Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
-- Dhara Solanki <dhara.solanki@initos.com>
-- Ruchir Shukla <ruchir@bizzappdev.com>
-- Eduardo de Miguel (`Moduon <https://www.moduon.team/>`__)
-- Sodexis Team <dev@sodexis.com>
+-  Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
+-  Dhara Solanki <dhara.solanki@initos.com>
+-  Ruchir Shukla <ruchir@bizzappdev.com>
+-  Eduardo de Miguel (`Moduon <https://www.moduon.team/>`__)
+-  Sodexis Team <dev@sodexis.com>
 
 Maintainers
 -----------
