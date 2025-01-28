@@ -77,6 +77,7 @@ addon | version | maintainers | summary
 [sale_tier_validation](sale_tier_validation/) | 17.0.1.0.0 |  | Extends the functionality of Sale Orders to support a tier validation process.
 [sale_validity_auto_cancel](sale_validity_auto_cancel/) | 17.0.1.0.0 | [![JordiMForgeFlow](https://github.com/JordiMForgeFlow.png?size=30px)](https://github.com/JordiMForgeFlow) | Automatically cancel quotations after validity period.
 [sales_team_security](sales_team_security/) | 17.0.1.0.1 | [![pedrobaeza](https://github.com/pedrobaeza.png?size=30px)](https://github.com/pedrobaeza) [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | New group for seeing only sales channel's documents
+[sales_team_security_sale](sales_team_security_sale/) | 17.0.1.0.0 | [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | Integrates sales_team_security with sale
 
 [//]: # (end addons)
 
