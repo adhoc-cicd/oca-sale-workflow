@@ -56,6 +56,7 @@ class TestSaleOrderType(common.TransactionCase):
         self.sale_pricelist = self.env["product.pricelist"].create(
             {"name": "Public Pricelist", "sequence": 1}
         )
+        self.project_id = self.env["project.project"].create({"name": "Project sample"})
         self.free_carrier = self.env.ref("account.incoterm_FCA")
         self.sale_type = self.sale_type_model.create(
             {
@@ -66,6 +67,7 @@ class TestSaleOrderType(common.TransactionCase):
                 "picking_policy": "one",
                 "payment_term_id": self.immediate_payment.id,
                 "pricelist_id": self.sale_pricelist.id,
+                "project_id": self.project_id.id,
                 "incoterm_id": self.free_carrier.id,
                 "quotation_validity_days": 10,
             }
@@ -79,6 +81,7 @@ class TestSaleOrderType(common.TransactionCase):
                 "picking_policy": "one",
                 "payment_term_id": self.immediate_payment.id,
                 "pricelist_id": self.sale_pricelist.id,
+                "project_id": self.project_id.id,
                 "incoterm_id": self.free_carrier.id,
             }
         )
@@ -125,6 +128,7 @@ class TestSaleOrderType(common.TransactionCase):
                 "picking_policy": "one",
                 "payment_term_id": self.immediate_payment.id,
                 "pricelist_id": self.sale_pricelist.id,
+                "project_id": self.project_id.id,
                 "incoterm_id": self.free_carrier.id,
                 "route_id": self.sale_route.id,
             }
@@ -158,6 +162,7 @@ class TestSaleOrderType(common.TransactionCase):
         self.assertEqual(order.picking_policy, sale_type.picking_policy)
         self.assertEqual(order.payment_term_id, sale_type.payment_term_id)
         self.assertEqual(order.pricelist_id, sale_type.pricelist_id)
+        self.assertEqual(order.project_id, sale_type.project_id)
         self.assertEqual(order.incoterm, sale_type.incoterm_id)
         order.action_confirm()
         invoice = order._create_invoices()
