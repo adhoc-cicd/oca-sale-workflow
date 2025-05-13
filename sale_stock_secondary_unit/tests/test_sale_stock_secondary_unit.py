@@ -25,7 +25,8 @@ class TestSaleStockOrderSecondaryUnit(TransactionCase):
         cls.product = cls.env["product.product"].create(
             {
                 "name": "test",
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
                 "uom_id": cls.product_uom_kg.id,
                 "uom_po_id": cls.product_uom_kg.id,
             }
