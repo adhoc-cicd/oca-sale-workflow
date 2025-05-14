@@ -1,1 +1,3 @@
 odoo-test-helper
+odoo-addon-sale_order_secondary_unit @ git+https://github.com/OCA/sale-workflow@refs/pull/3538/head#subdirectory=sale_order_secondary_unit
+odoo-addon-stock_secondary_unit @ git+https://github.com/OCA/stock-logistics-warehouse@refs/pull/2280/head#subdirectory=stock_secondary_unit
