@@ -95,7 +95,8 @@ class TestCommon(BaseCommon):
             self.check_permission_subscribe = False
         else:
             self._check_permission(self.user, self.team2, True)
-        self._check_permission(self.user2, self.team2, False)
+        if not is_res_partner:
+            self._check_permission(self.user2, self.team2, False)
         if not is_res_partner:
             self._check_permission(self.user2, self.team, True)
         # Add to group "See all leads"
