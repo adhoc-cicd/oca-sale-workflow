@@ -59,6 +59,11 @@ For keeping consistent accesses, followers of the main and
 shipping/invoice contacts are synced according the salesman of the
 children contacts
 
+Additionally, users with the "User: Team documents Only" group can see
+contacts created by any salesman that belongs to the same sales team(s),
+allowing team members to view and access contacts managed by their
+teammates.
+
 **Table of contents**
 
 .. contents::
