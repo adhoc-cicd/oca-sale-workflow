@@ -287,3 +287,126 @@ class TestSaleOrderType(BaseCommon):
             order_line.product_uom_qty = 1.0
         sale_form.type_id = self.sale_type.browse()
         sale_form.save()
+
+    def test_credit_note_preserves_sale_type_from_sale_order(self):
+        """Test credit notes preserve sale order type after delivery.
+
+        When creating a credit note from a confirmed sale order after
+        delivery and invoicing, the sale_type_id from the sale order
+        should be maintained and not overridden by the partner's
+        default sale type.
+
+        Scenario:
+        1. Create two different sale order types
+        2. Set a partner with a specific default sale type
+        3. Create and confirm a sale order with a different sale type
+        4. Process the delivery (picking)
+        5. Create the final invoice from the sale order
+        6. Return the products
+        7. Create a credit note using "Create Invoice" button
+        8. Verify the credit note has the same sale type as the
+           sale order, not the partner's default sale type
+        """
+        # Setup: Create two different sale order types
+        sale_type_for_order = self.sale_type  # "Test Sale Order Type"
+        sale_type_for_partner = self.sale_type_quot  # "Test Quotation"
+
+        # Use a storable product for delivery flow
+        storable_product = self.env["product.product"].create(
+            {
+                "name": "Storable Product for Test",
+                "type": "consu",
+                "is_storable": True,
+                "invoice_policy": "delivery",
+            }
+        )
+
+        # Update stock for the product
+        stock_location = self.env.ref("stock.stock_location_stock")
+        self.env["stock.quant"]._update_available_quantity(
+            storable_product, stock_location, 10.0
+        )
+
+        # Create a test partner with a specific default sale type
+        test_partner = self.env["res.partner"].create(
+            {
+                "name": "Azure Interior Test",
+                "sale_type": sale_type_for_partner.id,
+            }
+        )
+
+        # Verify partner has the expected default sale type
+        self.assertEqual(test_partner.sale_type, sale_type_for_partner)
+
+        # Create and confirm a sale order with a DIFFERENT sale type
+        # than partner's default
+        sale_form = Form(self.env["sale.order"])
+        sale_form.partner_id = test_partner
+        with sale_form.order_line.new() as order_line:
+            order_line.product_id = storable_product
+            order_line.product_uom_qty = 2.0
+        sale_order = sale_form.save()
+
+        # Manually set a different sale type (simulating user selection)
+        sale_order.type_id = sale_type_for_order
+        self.assertEqual(sale_order.type_id, sale_type_for_order)
+
+        # Confirm the sale order
+        sale_order.action_confirm()
+
+        # Process the delivery (picking)
+        picking = sale_order.picking_ids[0]
+        picking.action_assign()
+        for move in picking.move_ids:
+            move.quantity = move.product_uom_qty
+        picking.button_validate()
+
+        # Create the final invoice from the sale order
+        # (after delivery is done)
+        first_invoice = sale_order._create_invoices()
+        self.assertEqual(len(first_invoice), 1)
+        # Verify invoice inherits sale type from sale order
+        self.assertEqual(
+            first_invoice.sale_type_id,
+            sale_type_for_order,
+            "Invoice should inherit sale type from sale order",
+        )
+
+        # Post the invoice
+        first_invoice.action_post()
+
+        # Simulate product return: Create a return picking
+        return_picking_wizard = (
+            self.env["stock.return.picking"]
+            .with_context(
+                active_id=picking.id,
+                active_model="stock.picking",
+            )
+            .create({})
+        )
+        return_picking_wizard.product_return_moves.quantity = 2.0
+        return_picking = return_picking_wizard._create_return()
+
+        return_picking.action_confirm()
+        return_picking.move_ids.write({"quantity": 2.0, "picked": True})
+        return_picking.button_validate()
+        # Now create credit note using "Create Invoice" button
+        # on the sale order (this is the Odoo native switch)
+        # This simulates clicking "Create Invoice" after the return
+
+        self.env["sale.advance.payment.inv"].with_context(
+            active_model="sale.order",
+            active_ids=sale_order.ids,
+        ).sudo().create({}).create_invoices()
+
+        credit_note = sale_order.invoice_ids[-1]
+        # CRITICAL ASSERTION: Credit note should preserve the
+        # sale order's type, NOT default to the partner's sale type
+        self.assertEqual(
+            credit_note.sale_type_id,
+            sale_type_for_order,
+            "Credit note should preserve sale type from sale order "
+            f"(expected: {sale_type_for_order.name}), "
+            "not use partner's default sale type "
+            f"(partner has: {sale_type_for_partner.name})",
+        )
