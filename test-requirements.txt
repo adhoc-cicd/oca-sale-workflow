@@ -1,1 +1,2 @@
 odoo-addon-stock_restrict_lot @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/2151/head#subdirectory=stock_restrict_lot
+odoo-addon-account_invoice_triple_discount @ git+https://github.com/OCA/account-invoicing.git@refs/pull/2144/head#subdirectory=account_invoice_triple_discount
