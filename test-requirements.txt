@@ -1,0 +1,1 @@
+odoo-addon-product_customerinfo@git+https://github.com/OCA/product-attribute.git@refs/pull/2167/head#subdirectory=product_customerinfo
