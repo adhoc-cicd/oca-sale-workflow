@@ -1,1 +1,2 @@
 odoo-addon-product_customerinfo@git+https://github.com/OCA/product-attribute.git@refs/pull/2167/head#subdirectory=product_customerinfo
+odoo-addon-stock_restrict_lot @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/2151/head#subdirectory=stock_restrict_lot
