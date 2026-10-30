@@ -1,1 +1,2 @@
 odoo-addon-base_exception @ git+https://github.com/OCA/server-tools.git@refs/pull/3800/head#subdirectory=base_exception
+odoo-addon-account_invoice_triple_discount @ git+https://github.com/OCA/account-invoicing.git@refs/pull/2478/head#subdirectory=account_invoice_triple_discount
